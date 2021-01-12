@@ -1,0 +1,27 @@
+ND-controller-NAME = Balboa
+ND-controller-ICON = GenericCtl
+
+ND-SPA-NAME = SPA
+ND-SPA-ICON = GenericCtl
+ND-SPA_LUM-NAME = Light
+ND-SPA_LUM-ICON = GenericRsp
+ND-SPA-PUMP-NAME = Pump
+ND-SPA-PUMP-ICON = Switch
+ND-SPA-BLOWER-NAME = Blower
+ND-SPA-BLOWER-ICON = Switch
+ND-SPA-TEMP-NAME = Temp Control
+ND-SPA-TEMP-ICON = TempSensor
+
+ST-ST-NAME = Connected
+ST-GV1-NAME = Status
+ST-CLITEMP-NAME = SPA Temperature
+
+CMD-DON-NAME = On
+CMD-DOF-NAME = Off
+CMD-QUERY-NAME = Query
+CMD-DISCOVERY-NAME = Discover
+CMD-SET_TEMP-NAME = Set Temperature
+
+SPEEDSEL-0 = Off
+SPEEDSEL-1 = On - Low
+SPEEDSEL-2 = On - High
