@@ -43,4 +43,29 @@
             </accepts>
         </cmds>
     </nodeDef>
+    <nodeDef id="SPA_BLOWER" nls="MGR">
+        <editors />
+        <sts>
+            <st id="ST-GV1" editor="OnOff" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+              <cmd id="DON" />
+              <cmd id="DOF" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="SPA_PUMP" nls="MGR">
+        <editors />
+        <sts>
+            <st id="ST-GV1" editor="speed"" />
+        </sts>
+        <cmds>
+            <sends />
+                <cmd id="CMD-SET_TEMP">
+                  <p id="" editor="temp" />
+                </cmd>
+        </cmds>
+    </nodeDef>
 </nodeDefs>
