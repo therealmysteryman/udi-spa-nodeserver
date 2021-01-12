@@ -1,0 +1,19 @@
+<editors>
+
+    <editor id="bool">
+        <range uom="2" subset="0,1" />
+    </editor>
+
+    <editor id="OnOff">
+        <range uom="78" subset="0,100" />
+    </editor>
+        
+    <editor id="speed">
+		    <range uom="25" subset="0-2" nls="SPEEDSEL" />
+	  </editor>
+    
+   <editor id="temp">
+       <range uom="4" min="70" max="104" step="1" prec="0" />
+   </editor>   
+        
+</editors>
