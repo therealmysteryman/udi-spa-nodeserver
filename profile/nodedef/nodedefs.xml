@@ -19,7 +19,7 @@
     <nodeDef id="SPA" nls="MGR">
         <editors />
         <sts>
-            <st id="ST-CLITEMP-NAME" editor="temp" />
+            <st id="ST-CLITEMP" editor="temp" />
         </sts>
         <cmds>
             <sends />
@@ -27,6 +27,19 @@
                 <cmd id="CMD-SET_TEMP">
                   <p id="" editor="temp" />
                 </cmd>
+            </accepts>
+        </cmds>
+    </nodeDef>
+   <nodeDef id="SPA_LUM" nls="MGR">
+        <editors />
+        <sts>
+            <st id="ST-GV1" editor="OnOff" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+              <cmd id="DON" />
+              <cmd id="DOF" />
             </accepts>
         </cmds>
     </nodeDef>
