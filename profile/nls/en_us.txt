@@ -9,8 +9,6 @@ ND-SPA-PUMP-NAME = Pump
 ND-SPA-PUMP-ICON = Switch
 ND-SPA-BLOWER-NAME = Blower
 ND-SPA-BLOWER-ICON = Switch
-ND-SPA-TEMP-NAME = Temp Control
-ND-SPA-TEMP-ICON = TempSensor
 
 ST-ST-NAME = Connected
 ST-GV1-NAME = Status
