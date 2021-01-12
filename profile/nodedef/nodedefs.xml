@@ -59,13 +59,13 @@
     <nodeDef id="SPA_PUMP" nls="MGR">
         <editors />
         <sts>
-            <st id="ST-GV1" editor="speed"" />
+            <st id="ST-GV1" editor="speed" />
         </sts>
         <cmds>
-            <sends />
-                <cmd id="CMD-SET_TEMP">
-                  <p id="" editor="temp" />
-                </cmd>
+        <sends />
+            <cmd id="CMD-SET_SPEED">
+               <p id="" editor="speed" />
+            </cmd>
         </cmds>
     </nodeDef>
 </nodeDefs>
