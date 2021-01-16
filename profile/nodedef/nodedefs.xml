@@ -27,45 +27,15 @@
                 <cmd id="CMD-SET_TEMP">
                   <p id="" editor="temp" />
                 </cmd>
+                <cmd id="CMD-SET_SPEED_P1">
+                   <p id="" editor="speed" />
+                </cmd>
+                <cmd id="CMD-SET_SPEED_P2">
+                   <p id="" editor="speed" />
+                </cmd>
+                <cmd id="CMD-BLOWER" />
+                <cmd id="CMD-LIGHT" />
             </accepts>
-        </cmds>
-    </nodeDef>
-   <nodeDef id="SPA_LUM" nls="MGR">
-        <editors />
-        <sts>
-            <st id="ST-GV1" editor="OnOff" />
-        </sts>
-        <cmds>
-            <sends />
-            <accepts>
-              <cmd id="DON" />
-              <cmd id="DOF" />
-            </accepts>
-        </cmds>
-    </nodeDef>
-    <nodeDef id="SPA_BLOWER" nls="MGR">
-        <editors />
-        <sts>
-            <st id="ST-GV1" editor="OnOff" />
-        </sts>
-        <cmds>
-            <sends />
-            <accepts>
-              <cmd id="DON" />
-              <cmd id="DOF" />
-            </accepts>
-        </cmds>
-    </nodeDef>
-    <nodeDef id="SPA_PUMP" nls="MGR">
-        <editors />
-        <sts>
-            <st id="ST-GV1" editor="speed" />
-        </sts>
-        <cmds>
-        <sends />
-            <cmd id="CMD-SET_SPEED">
-               <p id="" editor="speed" />
-            </cmd>
         </cmds>
     </nodeDef>
 </nodeDefs>
