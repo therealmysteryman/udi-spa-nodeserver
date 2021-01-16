@@ -1,25 +1,26 @@
-ND-controller-NAME = Balboa
+ND-controller-NAME = SpaBalboa
 ND-controller-ICON = GenericCtl
 
-ND-SPA-NAME = SPA
+ND-SPA-NAME = Spa
 ND-SPA-ICON = GenericCtl
-ND-SPA_LUM-NAME = Light
-ND-SPA_LUM-ICON = GenericRsp
-ND-SPA-PUMP-NAME = Pump
-ND-SPA-PUMP-ICON = Switch
-ND-SPA-BLOWER-NAME = Blower
-ND-SPA-BLOWER-ICON = Switch
 
 ST-ST-NAME = Connected
-ST-GV1-NAME = Status
+ST-GV1-NAME = Pump 1
+ST-GV2-NAME = Pump 2
+ST-GV3-NAME = Circulation Pump
+ST-GV4-NAME = Blower
+ST-GV5-NAME = Light
 ST-CLITEMP-NAME = SPA Temperature
 
-CMD-DON-NAME = On
-CMD-DOF-NAME = Off
-CMD-SET_SPEED-NAME = Speed
+CMD-MGR-SET_SPEED_P1-NAME = Set Pump 1
+CMD-MGR-SET_SPEED_P2-NAME = Set Pump 2
+CMD-MGR-SET_TEMP-NAME = Set Temperature
+CMD-MGR-BLOWER-NAME = Blower
+CMD-MGR-CIRP-NAME = Circulation Pump
+CMD-MGR-LIGHT-NAME = Light
+
 CMD-QUERY-NAME = Query
 CMD-DISCOVERY-NAME = Discover
-CMD-SET_TEMP-NAME = Set Temperature
 CMD-INSTALL_PROFILE-NAME = Install Profile
 
 SPEEDSEL-0 = Off
