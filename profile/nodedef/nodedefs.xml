@@ -20,21 +20,27 @@
         <editors />
         <sts>
             <st id="ST-CLITEMP" editor="temp" />
+            <st id="ST-GV1" editor="speed" />
+            <st id="ST-GV2" editor="speed" />
+            <st id="ST-GV3" editor="OnOff" />
+            <st id="ST-GV4" editor="OnOff" />
+            <st id="ST-GV5" editor="OnOff" />
         </sts>
         <cmds>
             <sends />
             <accepts>
-                <cmd id="CMD-SET_TEMP">
-                  <p id="" editor="temp" />
+                <cmd id="CMD-MGR-SET_TEMP-NAME">
+                  <p id="" editor="temp"  init="ST-CLITEMP" />
                 </cmd>
-                <cmd id="CMD-SET_SPEED_P1">
-                   <p id="" editor="speed" />
+                <cmd id="CMD-MGR-SET_SPEED_P1-NAME">
+                   <p id="" editor="speed" init="ST-GV1" />
                 </cmd>
-                <cmd id="CMD-SET_SPEED_P2">
-                   <p id="" editor="speed" />
+                <cmd id="CMD-MGR-SET_SPEED_P2-NAME">
+                   <p id="" editor="speed" init="ST-GV2" />
                 </cmd>
-                <cmd id="CMD-BLOWER" />
-                <cmd id="CMD-LIGHT" />
+                <cmd id="CMD-MGR-CIRP-NAME" />
+                <cmd id="CMD-MGR-BLOWER-NAME" />
+                <cmd id="CMD-MGR-LIGHT-NAME" />
             </accepts>
         </cmds>
     </nodeDef>
