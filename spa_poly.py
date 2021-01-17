@@ -135,7 +135,7 @@ class Spa(polyinterface.Node):
     def setCirP(self, command):
         pass
     
-    def setLightself, command):
+    def setLight(self, command):
         pass
     
     def query(self):
