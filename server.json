@@ -3,7 +3,7 @@
     "name": "Balboa Spa",
     "docs": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver/blob/master/README.md",
     "type": "python3",
-    "executable": "balboa_poly.py",
+    "executable": "spa_poly.py",
     "install": "install.sh",
     "shortPoll": "60",
     "longPoll": "300",
