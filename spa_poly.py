@@ -78,25 +78,8 @@ class Controller(polyinterface.Controller):
             self.hb = 0
 
     def discover(self, *args, **kwargs):
-        asyncio.run(self.getTemp())
-
-    async def getTemp (self) :
-        print ("Start")
-        spa = pybalboa.BalboaSpaWifi("172.16.50.89")
-        await spa.connect()
-        await spa.send_mod_ident_req()
-        await spa.send_panel_req(0, 1)
-        msg = await spa.read_one_message()
-        spa.parse_device_configuration(msg)
-        if not spa.config_loaded:
-            print('Config not loaded, something is wrong!')
-        msg = await spa.read_one_message()
-        msg = await spa.read_one_message()
-        await spa.parse_status_update(msg)
-        print(spa.get_curtemp())
-        await spa.disconnect()
-        return
-
+        pass
+    
     def delete(self):
         LOGGER.info('Deleting Balboa Spa')
 
@@ -157,8 +140,26 @@ class Spa(polyinterface.Node):
     def setLight(self, command):
         pass
     
+    async def getTemp (self) :
+        spa = pybalboa.BalboaSpaWifi("172.16.50.89")
+        await spa.connect()
+        await spa.send_mod_ident_req()
+        await spa.send_panel_req(0, 1)
+        msg = await spa.read_one_message()
+        spa.parse_device_configuration(msg)
+        if not spa.config_loaded:
+            print('Config not loaded, something is wrong!')
+        msg = await spa.read_one_message()
+        msg = await spa.read_one_message()
+        await spa.parse_status_update(msg)
+        self.setDriver('CLITEMP', spa.get_curtemp())
+        await spa.disconnect()
+        return
+    
     def query(self):
+        asyncio.run(self.getTemp())
         self.reportDrivers()
+    
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': 25},
                {'driver': 'GV2', 'value': 0, 'uom': 25},
                {'driver': 'GV3', 'value': 0, 'uom': 78},
