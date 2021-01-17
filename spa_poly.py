@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This is a NodeServer for August written by automationgeek (Jean-Francois Tremblay)
+This is a NodeServer for Balboa Spa written by automationgeek (Jean-Francois Tremblay)
 based on the NodeServer template for Polyglot v2 written in Python2/3 by Einstein.42 (James Milne) milne.james@gmail.com
 """
 
@@ -35,38 +35,26 @@ class Controller(polyinterface.Controller):
         self.initialized = False
         self.queryON = False
         self.hb = 0
+        self.host = ""
         
     def start(self):
-        LOGGER.info('Started August for v2 NodeServer version %s', str(VERSION))
+        LOGGER.info('Started Balboa SPA for v2 NodeServer version %s', str(VERSION))
         self.setDriver('ST', 1)
         try:
-            if 'email' in self.polyConfig['customParams']:
-                self.email = self.polyConfig['customParams']['email']
+            if 'host' in self.polyConfig['customParams']:
+                self.host = self.polyConfig['customParams']['host']
             else:
-                self.email = ""
-                
-            if 'password' in self.polyConfig['customParams']:
-                self.password = self.polyConfig['customParams']['password']
-            else:
-                self.password = ""
+                self.host = ""
             
-            # Generate a UUID ( 11111111-1111-1111-1111-111111111111 )
-            if 'install_id' in self.polyConfig['customParams']:
-                self.install_id = self.polyConfig['customParams']['install_id']
-            else:
-                self.install_id = str(uuid.uuid4())
-                self.saveCustomData({ 'install_id': self.install_id })
-                LOGGER.debug('UUID Generated: {}'.format(self.install_id))
-
-            if self.email == "" or self.password == "" or self.install_id == "":
-                LOGGER.error('August requires email,password,install_id parameters to be specified in custom configuration.')
+            if self.host == "" :
+                LOGGER.error('SPA Balboa requires host parameter to be specified in custom configuration.')
                 return False
             else:
                 self.check_profile()
                 self.discover()
 
         except Exception as ex:
-            LOGGER.error('Error starting August NodeServer: %s', str(ex))
+            LOGGER.error('Error starting Balboa NodeServer: %s', str(ex))
            
     def shortPoll(self):
         self.setDriver('ST', 1)
@@ -77,10 +65,7 @@ class Controller(polyinterface.Controller):
 
     def longPoll(self):
         self.heartbeat()
-        
-        # Refresh Token
-        self.authenticator.refresh_access_token()
-
+       
     def heartbeat(self):
         LOGGER.debug('heartbeat: hb={}'.format(self.hb))
         if self.hb == 0:
@@ -91,23 +76,10 @@ class Controller(polyinterface.Controller):
             self.hb = 0
 
     def discover(self, *args, **kwargs):
-        count = 1
-        
-        self.api = Api(timeout=20)
-        self.authenticator = Authenticator(self.api, "email", self.email, self.password, install_id=self.install_id, access_token_cache_file="/var/polyglot/nodeservers/AugustLock/augustToken.txt")
-        self.authentication = self.authenticator.authenticate()
-        if ( self.authentication.state is AuthenticationState.AUTHENTICATED ) :
-            locks = self.api.get_locks(self.authentication.access_token)
-            for lock in locks:
-                myhash =  str(int(hashlib.md5(lock.device_id.encode('utf8')).hexdigest(), 16) % (10 ** 8))
-                self.addNode(AugustLock(self,self.address,myhash,  "lock_" + str(count),self.api, self.authentication, lock ))
-                count = count + 1
-        else :
-            self.authenticator.send_verification_code()
-            LOGGER.error('August requires validation, please send your authentification code')
-        
+        pass
+
     def delete(self):
-        LOGGER.info('Deleting August')
+        LOGGER.info('Deleting Balboa Spa')
 
     def check_profile(self):
         self.profile_info = get_profile_info(LOGGER)
@@ -128,26 +100,14 @@ class Controller(polyinterface.Controller):
     def install_profile(self,command):
         LOGGER.info("install_profile:")
         self.poly.installprofile()
-        
-    def send_validation_code(self,command) :
-        LOGGER.info("Send Validation Code")
-        val = int(command.get('value'))
-        validation_result = self.authenticator.validate_verification_code(val)
-        self.authentication = authenticator.authenticate()
-        if ( self.authentication.state is not AuthenticationState.AUTHENTICATED ) :
-            LOGGER.info("Invalid Authentication Code")
-        else :
-            LOGGER.info("Successfully Authentificated")
-
+       
     id = 'controller'
     commands = {
         'QUERY': shortPoll,
         'DISCOVER': discover,
-        'INSTALL_PROFILE': install_profile,
-        'VALIDATE_CODE': send_validation_code,
+        'INSTALL_PROFILE': install_profile
     }
-    drivers = [{'driver': 'ST', 'value': 1, 'uom': 2}, 
-               {'driver': 'GV3', 'value': 0, 'uom': 56}]
+    drivers = [{'driver': 'ST', 'value': 1, 'uom': 2}]
 
 class Spa(polyinterface.Node):
 
