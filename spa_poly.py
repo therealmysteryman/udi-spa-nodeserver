@@ -78,7 +78,7 @@ class Controller(polyinterface.Controller):
             self.hb = 0
 
     def discover(self, *args, **kwargs):
-        pass
+        self.addNode(Spa(self,self.address,"spa","spa",self.host ))
     
     def delete(self):
         LOGGER.info('Deleting Balboa Spa')
@@ -141,7 +141,7 @@ class Spa(polyinterface.Node):
         pass
     
     async def getTemp (self) :
-        spa = pybalboa.BalboaSpaWifi("172.16.50.89")
+        spa = pybalboa.BalboaSpaWifi(self.host)
         await spa.connect()
         await spa.send_mod_ident_req()
         await spa.send_panel_req(0, 1)
