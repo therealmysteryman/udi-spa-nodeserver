@@ -16,31 +16,37 @@
             </accepts>
         </cmds>
     </nodeDef>
-    <nodeDef id="SPA" nls="MGR">
+    <nodeDef id="spa" nls="MGR">
         <editors />
         <sts>
-            <st id="ST-CLITEMP" editor="temp" />
-            <st id="ST-GV1" editor="speed" />
-            <st id="ST-GV2" editor="speed" />
-            <st id="ST-GV3" editor="OnOff" />
-            <st id="ST-GV4" editor="OnOff" />
-            <st id="ST-GV5" editor="OnOff" />
+            <st id="CLITEMP" editor="temp" />
+            <st id="GV1" editor="speed" />
+            <st id="GV2" editor="speed" />
+            <st id="GV3" editor="OnOff" />
+            <st id="GV4" editor="OnOff" />
+            <st id="GV5" editor="OnOff" />
         </sts>
         <cmds>
             <sends />
             <accepts>
-                <cmd id="CMD-MGR-SET_TEMP-NAME">
-                  <p id="" editor="temp"  init="ST-CLITEMP" />
+                <cmd id="SET_TEMP">
+                  <p id="" editor="temp"  init="CLITEMP" />
                 </cmd>
-                <cmd id="CMD-MGR-SET_SPEED_P1-NAME">
-                   <p id="" editor="speed" init="ST-GV1" />
+                <cmd id="SET_SPEED_P1">
+                   <p id="" editor="speed" init="GV1" />
                 </cmd>
-                <cmd id="CMD-MGR-SET_SPEED_P2-NAME">
-                   <p id="" editor="speed" init="ST-GV2" />
+                <cmd id="SET_SPEED_P2">
+                   <p id="" editor="speed" init="GV2" />
                 </cmd>
-                <cmd id="CMD-MGR-CIRP-NAME" />
-                <cmd id="CMD-MGR-BLOWER-NAME" />
-                <cmd id="CMD-MGR-LIGHT-NAME" />
+                <cmd id="SET_CIRP">
+                   <p id="" editor="OnOff" init="GV3" />
+                </cmd>
+                <cmd id="SET_BLOWER">
+                   <p id="" editor="OnOff" init="GV4" /3
+                </cmd>
+                <cmd id="SET_LIGHT">
+                   <p id="" editor="OnOff" init="GV5" />
+                </cmd>
             </accepts>
         </cmds>
     </nodeDef>
