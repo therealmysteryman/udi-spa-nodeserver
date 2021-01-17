@@ -78,7 +78,7 @@ class Controller(polyinterface.Controller):
             self.hb = 0
 
     def discover(self, *args, **kwargs):
-        asyncio.run(getTemp())
+        asyncio.run(self.getTemp())
 
     async def getTemp (self) :
         print ("Start")
