@@ -42,7 +42,7 @@
                    <p id="" editor="OnOff" init="GV3" />
                 </cmd>
                 <cmd id="SET_BLOWER">
-                   <p id="" editor="OnOff" init="GV4" /3
+                   <p id="" editor="OnOff" init="GV4" />
                 </cmd>
                 <cmd id="SET_LIGHT">
                    <p id="" editor="OnOff" init="GV5" />
