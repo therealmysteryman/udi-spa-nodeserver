@@ -176,7 +176,7 @@ class Spa(polyinterface.Node):
                 if spa.lastupd != lastupd:
                     lastupd = spa.lastupd
 
-            # Current Temp
+            # Temp
             self.setDriver('CLITEMP', spa.get_curtemp())
             self.setDriver('GV6', spa. get_settemp())
                
@@ -190,13 +190,14 @@ class Spa(polyinterface.Node):
                 self.setDriver('GV4',0)
             else :
                 self.setDriver('GV4',100)
-                
+            
+            # Light
             self.setDriver('GV5', spa.get_light(0))
            
             await spa.disconnect()
             return
         except Exception as ex :
-            print ("_setTemp: ", ex )
+            LOGGER.debug ("_setTemp: ", ex )
     
     async def _setTemp(self,temp):
         try:
