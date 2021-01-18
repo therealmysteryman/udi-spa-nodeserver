@@ -247,7 +247,7 @@ class Spa(polyinterface.Node):
             await spa.send_panel_req(0, 1)
             await spa.send_temp_change(temp)
             await spa.disconnect()
-         except Exception as ex :
+        except Exception as ex :
             print ("_setTemp: " + ex )
         
     async def _setPump(pump, setting):
