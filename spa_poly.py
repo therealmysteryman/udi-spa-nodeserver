@@ -123,22 +123,48 @@ class Spa(polyinterface.Node):
         self.query()
 
     def setP1(self, command):
-        pass
+        try :
+            asyncio.run(self._setPump(0,int(command.get('value')))
+        except :
+            pass
         
     def setP2(self, command):
-        pass
+        try :
+            asyncio.run(self._setPump(1,int(command.get('value')))
+        except :
+            pass
     
     def setTemp(self, command):
-        pass
+        try :
+            asyncio.run(self._setTemp(int(command.get('value')))
+        except :
+            pass
     
     def setBlower(self, command):
-        pass
+        try :
+            if ( int(command.get('value')) == 100 ) :
+                val = 1
+            else :
+                val = 0
+            asyncio.run(self._setBlower(val))
+        except :
+            pass
         
     def setCirP(self, command):
-        pass
+        try :
+            asyncio.run(self._setPump(0,int(command.get('value')))
+        except :
+            pass
     
     def setLight(self, command):
         pass
+                        
+    def query(self):
+        try :
+            asyncio.run(self._getSpaStatus())
+            self.reportDrivers()
+        except :
+            pass
     
     async def getTemp (self) :
         spa = pybalboa.BalboaSpaWifi(self.host)
@@ -156,13 +182,79 @@ class Spa(polyinterface.Node):
         await spa.disconnect()
         return
     
-    def query(self):
-        try :
-            asyncio.run(self.getTemp())
-            self.reportDrivers()
-        except :
-            pass
+    async def _getSpaStatus (self) :
+        spa = balboa.BalboaSpaWifi(self.host)
+        await spa.connect()
+        asyncio.ensure_future(spa.listen())
+        
+        await spa.send_panel_req(0, 1)
+
+        for i in range(0, 30):
+            await asyncio.sleep(1)
+            if spa.config_loaded:
+            print("Config is loaded:")
+            print('Pump Array: {0}'.format(str(spa.pump_array)))
+            print('Light Array: {0}'.format(str(spa.light_array)))
+            print('Aux Array: {0}'.format(str(spa.aux_array)))
+            print('Circulation Pump: {0}'.format(spa.circ_pump))
+            print('Blower: {0}'.format(spa.blower))
+            print('Mister: {0}'.format(spa.mister))
+            break
+        print()
+
+        for i in range(0, 3):
+            await asyncio.sleep(1)
+            print("New data as of {0}".format(spa.lastupd))
+            print("Current Temp: {0}".format(spa.curtemp))
+            print("Tempscale: {0}".format(spa.get_tempscale(text=True)))
+            print("Set Temp: {0}".format(spa.get_settemp()))
+            print("Heat Mode: {0}".format(spa.get_heatmode(True)))
+            print("Heat State: {0}".format(spa.get_heatstate(True)))
+            print("Temp Range: {0}".format(spa.get_temprange(True)))
+            print("Pump Status: {0}".format(str(spa.pump_status)))
+            print("Circulation Pump: {0}".format(spa.get_circ_pump(True)))
+            print("Light Status: {0}".format(str(spa.light_status)))
+            print("Mister Status: {0}".format(spa.get_mister(True)))
+            print("Aux Status: {0}".format(str(spa.aux_status)))
+            print("Blower Status: {0}".format(spa.get_blower(True)))
+            print("Spa Time: {0:02d}:{1:02d} {2}".format(
+                spa.time_hour,
+                spa.time_minute,
+                spa.get_timescale(True)
+            ))
+            print("Filter Mode: {0}".format(spa.get_filtermode(True)))
+            print()
+            
+            self.setDriver('CLITEMP', spa.get_curtemp())
     
+        await spa.disconnect()
+        return
+    
+    async def _setTemp(temp):
+        
+        spa = balboa.BalboaSpaWifi(self.host)
+        await spa.connect()
+        asyncio.ensure_future(spa.listen())     
+        await spa.send_panel_req(0, 1)
+        await spa.send_temp_change(temp)
+        await spa.disconnect()
+        
+    async def _setPump(pump, setting):
+        spa = balboa.BalboaSpaWifi(self.host)
+        await spa.connect()
+        asyncio.ensure_future(spa.listen())     
+        await spa.send_panel_req(0, 1)
+        await spa.change_pump(pump, setting)              
+        await spa.disconnect()
+                        
+    async def _setBlower(setting):
+        spa = balboa.BalboaSpaWifi(self.host)
+        await spa.connect()
+        asyncio.ensure_future(spa.listen())     
+        await spa.send_panel_req(0, 1)
+        await spa.change_blower(setting)
+        await spa.disconnect()
+                       
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': 25},
                {'driver': 'GV2', 'value': 0, 'uom': 25},
                {'driver': 'GV3', 'value': 0, 'uom': 78},
