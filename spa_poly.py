@@ -125,6 +125,7 @@ class Spa(polyinterface.Node):
     def setP1(self, command):
         try :
             val = int(command.get('value'))
+            print(val)
             asyncio.run(self._setPump(0,val))
         except Exception as ex :
             print ("setP1:", ex)
@@ -239,56 +240,62 @@ class Spa(polyinterface.Node):
         print ("End")
         return
     
-    async def _setTemp(temp):
+    async def _setTemp(self,temp):
         try:
-            spa = balboa.BalboaSpaWifi(self.host)
+            spa = pybalboa.BalboaSpaWifi(self.host)
             await spa.connect()
             asyncio.ensure_future(spa.listen())     
             await spa.send_panel_req(0, 1)
+            for i in range(0, 30):
+                await asyncio.sleep(1)
+                if spa.config_loaded:
+                    break
             await spa.send_temp_change(temp)
             await spa.disconnect()
         except Exception as ex :
-            print ("_setTemp: " + ex )
+            LOGGER.debug ("_setTemp: ", ex )
         
     async def _setPump(self,pump, setting):
         try:
-            print ("1")
             spa = pybalboa.BalboaSpaWifi(self.host)
-            print ("2")
             await spa.connect()
-            print ("3")
             asyncio.ensure_future(spa.listen())
-            print ("4")
             await spa.send_panel_req(0, 1)
-            print ("5")
             for i in range(0, 30):
                 await asyncio.sleep(1)
-                print ("6")
                 if spa.config_loaded:
-                    print ("7")
                     break
-            print ("8")
             await spa.change_pump(pump, setting)
-            print ("9")
             await spa.disconnect()
-            print ("10")
         except Exception as ex :
-            print ("_setPump: ", ex )
+            LOGGER.debug ("_setPump: ", ex )
         return
                         
-    async def _setBlower(setting):
-        spa = balboa.BalboaSpaWifi(self.host)
-        await spa.connect()
-        asyncio.ensure_future(spa.listen())     
-        await spa.send_panel_req(0, 1)
-        await spa.change_blower(setting)
-        await spa.disconnect()
+    async def _setBlower(self,setting):
+        try :
+            spa = pybalboa.BalboaSpaWifi(self.host)
+            await spa.connect()
+            asyncio.ensure_future(spa.listen())
+            await spa.send_panel_req(0, 1)
+            for i in range(0, 30):
+                await asyncio.sleep(1)
+                if spa.config_loaded:
+                    break
+            await spa.change_blower(setting)
+            await spa.disconnect()
+        except Exception as ex :
+            LOGGER.debug ("_setBlower: ", ex )
+        return
                         
-    async def _setLight(state):
-        spa = balboa.BalboaSpaWifi(self.host)
+    async def _setLight(self,state):
+        spa = pybalboa.BalboaSpaWifi(self.host)
         await spa.connect()
         asyncio.ensure_future(spa.listen())     
         await spa.send_panel_req(0, 1)
+        for i in range(0, 30):
+            await asyncio.sleep(1)
+            if spa.config_loaded:
+                break
         await spa.change_light(0,state)
         await spa.disconnect()
                        
