@@ -124,9 +124,10 @@ class Spa(polyinterface.Node):
 
     def setP1(self, command):
         try :
+            print (command.get('value'))
             asyncio.run(self._setPump(0,int(command.get('value'))))
         except :
-            pass
+            print ("Err")
         
     def setP2(self, command):
         try :
@@ -164,8 +165,10 @@ class Spa(polyinterface.Node):
                         
     def query(self):
         try :
+            print ("query")
             asyncio.run(self._getSpaStatus())
             self.reportDrivers()
+            print ("endquery")
         except :
             pass
     
@@ -186,6 +189,7 @@ class Spa(polyinterface.Node):
         return
     
     async def _getSpaStatus (self) :
+        print ("Begin")
         spa = balboa.BalboaSpaWifi(self.host)
         await spa.connect()
         asyncio.ensure_future(spa.listen()) 
@@ -232,6 +236,8 @@ class Spa(polyinterface.Node):
             
         self.setDriver('CLITEMP', spa.get_curtemp())
         await spa.disconnect()
+        print ("End")
+        return
     
     async def _setTemp(temp):
         spa = balboa.BalboaSpaWifi(self.host)
@@ -248,6 +254,7 @@ class Spa(polyinterface.Node):
         await spa.send_panel_req(0, 1)
         await spa.change_pump(pump, setting)              
         await spa.disconnect()
+        return
                         
     async def _setBlower(setting):
         spa = balboa.BalboaSpaWifi(self.host)
