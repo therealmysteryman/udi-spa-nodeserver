@@ -140,10 +140,14 @@ class Spa(polyinterface.Node):
         else :
             val = 0
         asyncio.run(self._setBlower(val))
-        self.setDriver('GV4',val)
+        self.setDriver('GV4',int(command.get('value')))
         
     def setCirP(self, command):
-        asyncio.run(self._setPump(0,int(command.get('value'))))
+        if ( int(command.get('value')) == 100 ) :
+            val = 1
+        else :
+            val = 0
+        asyncio.run(self._setPump(0,val))
         self.setDriver('GV3', int(command.get('value')))
     
     def setLight(self, command):
