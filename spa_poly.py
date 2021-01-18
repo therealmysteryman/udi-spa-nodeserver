@@ -264,9 +264,9 @@ class Spa(polyinterface.Node):
             for i in range(0, 30):
                 await asyncio.sleep(1)
                 print ("6")
-                    if spa.config_loaded:
-                        print ("7")
-                        break
+                if spa.config_loaded:
+                    print ("7")
+                    break
             print ("8")
             await spa.change_pump(pump, setting)
             print ("9")
