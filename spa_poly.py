@@ -253,7 +253,7 @@ class Spa(polyinterface.Node):
     async def _setPump(self,pump, setting):
         try:
             print ("1")
-            spa = balboa.BalboaSpaWifi(self.host)
+            spa = pybalboa.BalboaSpaWifi(self.host)
             print ("2")
             await spa.connect()
             print ("3")
