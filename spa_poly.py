@@ -124,19 +124,19 @@ class Spa(polyinterface.Node):
 
     def setP1(self, command):
         try :
-            asyncio.run(self._setPump(0,int(command.get('value')))
+            asyncio.run(self._setPump(0,int(command.get('value'))))
         except :
             pass
         
     def setP2(self, command):
         try :
-            asyncio.run(self._setPump(1,int(command.get('value')))
+            asyncio.run(self._setPump(1,int(command.get('value'))))
         except :
             pass
     
     def setTemp(self, command):
         try :
-            asyncio.run(self._setTemp(int(command.get('value')))
+            asyncio.run(self._setTemp(int(command.get('value'))))
         except :
             pass
     
@@ -152,13 +152,13 @@ class Spa(polyinterface.Node):
         
     def setCirP(self, command):
         try :
-            asyncio.run(self._setPump(0,int(command.get('value')))
+            asyncio.run(self._setPump(0,int(command.get('value'))))
         except :
             pass
     
     def setLight(self, command):
         try :
-            asyncio.run(self._setLight(0,int(command.get('value')))
+            asyncio.run(self._setLight(0,int(command.get('value'))))
         except :
             pass
                         
