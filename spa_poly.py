@@ -250,7 +250,7 @@ class Spa(polyinterface.Node):
     async def _setPump(pump, setting):
         spa = balboa.BalboaSpaWifi(self.host)
         await spa.connect()
-        asyncio.ensure_future(spa.listen())     
+        #asyncio.ensure_future(spa.listen())     
         await spa.send_panel_req(0, 1)
         await spa.change_pump(pump, setting)              
         await spa.disconnect()
