@@ -123,46 +123,26 @@ class Spa(polyinterface.Node):
         self.query()
 
     def setP1(self, command):
-        try :
-            val = int(command.get('value'))
-            print(val)
-            asyncio.run(self._setPump(0,val))
-        except Exception as ex :
-            print ("setP1:", ex)
+        asyncio.run(self._setPump(0,int(command.get('value'))))
         
     def setP2(self, command):
-        try :
-            asyncio.run(self._setPump(1,int(command.get('value'))))
-        except :
-            pass
+        asyncio.run(self._setPump(1,int(command.get('value'))))
     
     def setTemp(self, command):
-        try :
-            asyncio.run(self._setTemp(int(command.get('value'))))
-        except :
-            pass
+        asyncio.run(self._setTemp(int(command.get('value'))))
     
     def setBlower(self, command):
-        try :
-            if ( int(command.get('value')) == 100 ) :
-                val = 1
-            else :
-                val = 0
-            asyncio.run(self._setBlower(val))
-        except :
-            pass
+        if ( int(command.get('value')) == 100 ) :
+            val = 1
+        else :
+            val = 0
+        asyncio.run(self._setBlower(val))
         
     def setCirP(self, command):
-        try :
-            asyncio.run(self._setPump(0,int(command.get('value'))))
-        except :
-            pass
+        asyncio.run(self._setPump(0,int(command.get('value'))))
     
     def setLight(self, command):
-        try :
-            asyncio.run(self._setLight(0,int(command.get('value'))))
-        except :
-            pass
+        asyncio.run(self._setLight(0,int(command.get('value'))))
                         
     def query(self):
         try :
