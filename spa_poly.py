@@ -126,8 +126,8 @@ class Spa(polyinterface.Node):
         try :
             print (command.get('value'))
             asyncio.run(self._setPump(0,int(command.get('value'))))
-        except :
-            print ("Err")
+        except Exception as ex :
+            print ("setP1:" + ex)
         
     def setP2(self, command):
         try :
@@ -252,12 +252,26 @@ class Spa(polyinterface.Node):
         
     async def _setPump(pump, setting):
         try:
+            print ("1")
             spa = balboa.BalboaSpaWifi(self.host)
+            print ("2")
             await spa.connect()
-            #asyncio.ensure_future(spa.listen())     
+            print ("3")
+            asyncio.ensure_future(spa.listen())
+            print ("4")
             await spa.send_panel_req(0, 1)
-            await spa.change_pump(pump, setting)              
+            print ("5")
+            for i in range(0, 30):
+                await asyncio.sleep(1)
+                print ("6")
+                    if spa.config_loaded:
+                        print ("7")
+                        break
+            print ("8")
+            await spa.change_pump(pump, setting)
+            print ("9")
             await spa.disconnect()
+            print ("10")
         except Exception as ex :
             print ("_setPump: " + ex )
         return
