@@ -20,6 +20,7 @@
         <editors />
         <sts>
             <st id="CLITEMP" editor="temp" />
+            <st id="GV6" editor="temp" />
             <st id="GV1" editor="speed" />
             <st id="GV2" editor="speed" />
             <st id="GV3" editor="OnOff" />
@@ -30,7 +31,7 @@
             <sends />
             <accepts>
                 <cmd id="SET_TEMP">
-                  <p id="" editor="temp"  init="CLITEMP" />
+                  <p id="" editor="temp"  init="GV6" />
                 </cmd>
                 <cmd id="SET_SPEED_P1">
                    <p id="" editor="speed" init="GV1" />
