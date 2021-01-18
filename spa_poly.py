@@ -145,13 +145,8 @@ class Spa(polyinterface.Node):
         asyncio.run(self._setLight(0,int(command.get('value'))))
                         
     def query(self):
-        try :
-            print ("query")
-            #asyncio.run(self._getSpaStatus())
-            self.reportDrivers()
-            print ("endquery")
-        except :
-            pass
+        asyncio.run(self._getSpaStatus())
+        self.reportDrivers()
     
     async def getTemp (self) :
         spa = pybalboa.BalboaSpaWifi(self.host)
@@ -170,55 +165,58 @@ class Spa(polyinterface.Node):
         return
     
     async def _getSpaStatus (self) :
-        print ("Begin")
-        spa = balboa.BalboaSpaWifi(self.host)
-        await spa.connect()
-        asyncio.ensure_future(spa.listen()) 
-        await spa.send_panel_req(0, 1)
+        try :
+            print ("Begin")
+            spa = pybalboa.BalboaSpaWifi(self.host)
+            await spa.connect()
+            asyncio.ensure_future(spa.listen()) 
+            await spa.send_panel_req(0, 1)
 
-        for i in range(0, 30):
-            await asyncio.sleep(1)
-            if spa.config_loaded:
-                print("Config is loaded:")
-                print('Pump Array: {0}'.format(str(spa.pump_array)))
-                print('Light Array: {0}'.format(str(spa.light_array)))
-                print('Aux Array: {0}'.format(str(spa.aux_array)))
-                print('Circulation Pump: {0}'.format(spa.circ_pump))
-                print('Blower: {0}'.format(spa.blower))
-                print('Mister: {0}'.format(spa.mister))
-                break
-        print()
+            for i in range(0, 30):
+                await asyncio.sleep(1)
+                if spa.config_loaded:
+                    print("Config is loaded:")
+                    print('Pump Array: {0}'.format(str(spa.pump_array)))
+                    print('Light Array: {0}'.format(str(spa.light_array)))
+                    print('Aux Array: {0}'.format(str(spa.aux_array)))
+                    print('Circulation Pump: {0}'.format(spa.circ_pump))
+                    print('Blower: {0}'.format(spa.blower))
+                    print('Mister: {0}'.format(spa.mister))
+                    break
+            print()
 
-        lastupd = 0
-        for i in range(0, 3):
-            await asyncio.sleep(1)
-            if spa.lastupd != lastupd:
-                lastupd = spa.lastupd
-                print("New data as of {0}".format(spa.lastupd))
-                print("Current Temp: {0}".format(spa.curtemp))
-                print("Tempscale: {0}".format(spa.get_tempscale(text=True)))
-                print("Set Temp: {0}".format(spa.get_settemp()))
-                print("Heat Mode: {0}".format(spa.get_heatmode(True)))
-                print("Heat State: {0}".format(spa.get_heatstate(True)))
-                print("Temp Range: {0}".format(spa.get_temprange(True)))
-                print("Pump Status: {0}".format(str(spa.pump_status)))
-                print("Circulation Pump: {0}".format(spa.get_circ_pump(True)))
-                print("Light Status: {0}".format(str(spa.light_status)))
-                print("Mister Status: {0}".format(spa.get_mister(True)))
-                print("Aux Status: {0}".format(str(spa.aux_status)))
-                print("Blower Status: {0}".format(spa.get_blower(True)))
-                print("Spa Time: {0:02d}:{1:02d} {2}".format(
-                    spa.time_hour,
-                    spa.time_minute,
-                    spa.get_timescale(True)
-                ))
-                print("Filter Mode: {0}".format(spa.get_filtermode(True)))
-                print()
-            
-        self.setDriver('CLITEMP', spa.get_curtemp())
-        await spa.disconnect()
-        print ("End")
-        return
+            lastupd = 0
+            for i in range(0, 3):
+                await asyncio.sleep(1)
+                if spa.lastupd != lastupd:
+                    lastupd = spa.lastupd
+                    print("New data as of {0}".format(spa.lastupd))
+                    print("Current Temp: {0}".format(spa.curtemp))
+                    print("Tempscale: {0}".format(spa.get_tempscale(text=True)))
+                    print("Set Temp: {0}".format(spa.get_settemp()))
+                    print("Heat Mode: {0}".format(spa.get_heatmode(True)))
+                    print("Heat State: {0}".format(spa.get_heatstate(True)))
+                    print("Temp Range: {0}".format(spa.get_temprange(True)))
+                    print("Pump Status: {0}".format(str(spa.pump_status)))
+                    print("Circulation Pump: {0}".format(spa.get_circ_pump(True)))
+                    print("Light Status: {0}".format(str(spa.light_status)))
+                    print("Mister Status: {0}".format(spa.get_mister(True)))
+                    print("Aux Status: {0}".format(str(spa.aux_status)))
+                    print("Blower Status: {0}".format(spa.get_blower(True)))
+                    print("Spa Time: {0:02d}:{1:02d} {2}".format(
+                        spa.time_hour,
+                        spa.time_minute,
+                        spa.get_timescale(True)
+                    ))
+                    print("Filter Mode: {0}".format(spa.get_filtermode(True)))
+                    print()
+
+            self.setDriver('CLITEMP', spa.get_curtemp())
+            await spa.disconnect()
+            print ("End")
+            return
+        except Exception as ex :
+            print ("_setTemp: ", ex )
     
     async def _setTemp(self,temp):
         try:
