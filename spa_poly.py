@@ -157,7 +157,8 @@ class Spa(polyinterface.Node):
         return
     
     def query(self):
-        asyncio.run(self.getTemp())
+        #asyncio.run(self.getTemp())
+        self.setDriver('CLITEMP', 90)
         self.reportDrivers()
     
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': 25},
