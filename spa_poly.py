@@ -124,10 +124,10 @@ class Spa(polyinterface.Node):
 
     def setP1(self, command):
         try :
-            print (command.get('value'))
-            asyncio.run(self._setPump(0,int(command.get('value'))))
+            val = int(command.get('value'))
+            asyncio.run(self._setPump(0,val))
         except Exception as ex :
-            print ("setP1:" + ex)
+            print ("setP1:", ex)
         
     def setP2(self, command):
         try :
@@ -273,7 +273,7 @@ class Spa(polyinterface.Node):
             await spa.disconnect()
             print ("10")
         except Exception as ex :
-            print ("_setPump: " + ex )
+            print ("_setPump: ", ex )
         return
                         
     async def _setBlower(setting):
