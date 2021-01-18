@@ -120,7 +120,7 @@ class Spa(polyinterface.Node):
         self.host = host
 
     def start(self):
-        pass
+        self.query()
 
     def setP1(self, command):
         pass
@@ -157,9 +157,11 @@ class Spa(polyinterface.Node):
         return
     
     def query(self):
-        #asyncio.run(self.getTemp())
-        self.setDriver('CLITEMP', 91)
-        self.reportDrivers()
+        try :
+            asyncio.run(self.getTemp())
+            self.reportDrivers()
+        Except :
+            pass
     
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': 25},
                {'driver': 'GV2', 'value': 0, 'uom': 25},
