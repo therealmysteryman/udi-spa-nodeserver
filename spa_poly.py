@@ -166,7 +166,7 @@ class Spa(polyinterface.Node):
     def query(self):
         try :
             print ("query")
-            asyncio.run(self._getSpaStatus())
+            #asyncio.run(self._getSpaStatus())
             self.reportDrivers()
             print ("endquery")
         except :
@@ -240,12 +240,15 @@ class Spa(polyinterface.Node):
         return
     
     async def _setTemp(temp):
-        spa = balboa.BalboaSpaWifi(self.host)
-        await spa.connect()
-        asyncio.ensure_future(spa.listen())     
-        await spa.send_panel_req(0, 1)
-        await spa.send_temp_change(temp)
-        await spa.disconnect()
+        try:
+            spa = balboa.BalboaSpaWifi(self.host)
+            await spa.connect()
+            asyncio.ensure_future(spa.listen())     
+            await spa.send_panel_req(0, 1)
+            await spa.send_temp_change(temp)
+            await spa.disconnect()
+         except Exception as ex :
+            print ("_setTemp: " + ex )
         
     async def _setPump(pump, setting):
         spa = balboa.BalboaSpaWifi(self.host)
