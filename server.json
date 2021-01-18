@@ -1,6 +1,6 @@
 
 {
-    "name": "Balboa Spa",
+    "name": "BalboaSpa",
     "docs": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver/blob/master/README.md",
     "type": "python3",
     "executable": "spa_poly.py",
