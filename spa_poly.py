@@ -251,12 +251,15 @@ class Spa(polyinterface.Node):
             print ("_setTemp: " + ex )
         
     async def _setPump(pump, setting):
-        spa = balboa.BalboaSpaWifi(self.host)
-        await spa.connect()
-        #asyncio.ensure_future(spa.listen())     
-        await spa.send_panel_req(0, 1)
-        await spa.change_pump(pump, setting)              
-        await spa.disconnect()
+        try:
+            spa = balboa.BalboaSpaWifi(self.host)
+            await spa.connect()
+            #asyncio.ensure_future(spa.listen())     
+            await spa.send_panel_req(0, 1)
+            await spa.change_pump(pump, setting)              
+            await spa.disconnect()
+        except Exception as ex :
+            print ("_setPump: " + ex )
         return
                         
     async def _setBlower(setting):
