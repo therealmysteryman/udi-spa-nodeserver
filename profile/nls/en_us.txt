@@ -1,8 +1,8 @@
 ND-controller-NAME = SpaBalboa
 ND-controller-ICON = GenericCtl
 
-ND-SPA-NAME = Spa
-ND-SPA-ICON = GenericCtl
+ND-spa-NAME = Spa
+ND-spa-ICON = GenericCtl
 
 ST-ST-NAME = Connected
 ST-GV1-NAME = Pump 1 Speed
