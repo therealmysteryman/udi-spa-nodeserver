@@ -132,7 +132,7 @@ class Spa(polyinterface.Node):
     
     def setTemp(self, command):
         asyncio.run(self._setTemp(int(command.get('value'))))
-        self.setDriver('CLITEMP', int(command.get('value')))
+        self.setDriver('GV6', int(command.get('value')))
     
     def setBlower(self, command):
         if ( int(command.get('value')) == 100 ) :
@@ -178,6 +178,7 @@ class Spa(polyinterface.Node):
 
             # Current Temp
             self.setDriver('CLITEMP', spa.get_curtemp())
+            self.setDriver('GV6', spa. get_settemp())
                
             # Pump
             self.setDriver('GV1', spa.get_pump(0))
@@ -261,6 +262,7 @@ class Spa(polyinterface.Node):
                {'driver': 'GV3', 'value': 0, 'uom': 78},
                {'driver': 'GV4', 'value': 0, 'uom': 78},
                {'driver': 'GV5', 'value': 0, 'uom': 78},
+               {'driver': 'GV6', 'value': 0, 'uom': 4},
                {'driver': 'CLITEMP', 'value': 0, 'uom': 4}]
 
     id = 'spa'
