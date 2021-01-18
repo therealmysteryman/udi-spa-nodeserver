@@ -10,7 +10,8 @@ ST-GV2-NAME = Pump 2 Speed
 ST-GV3-NAME = Circulation Pump
 ST-GV4-NAME = Blower
 ST-GV5-NAME = Light
-ST-CLITEMP-NAME = Temperature
+ST-GV6-NAME = Set Temperature
+ST-CLITEMP-NAME = Current Temperature
 
 CMD-MGR-SET_SPEED_P1-NAME = Set Pump 1 Speed 
 CMD-MGR-SET_SPEED_P2-NAME = Set Pump 2 Speed
