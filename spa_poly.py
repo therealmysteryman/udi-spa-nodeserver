@@ -147,7 +147,7 @@ class Spa(polyinterface.Node):
         self.setDriver('GV3', int(command.get('value')))
     
     def setLight(self, command):
-        asyncio.run(self._setLight(0,int(command.get('value'))))
+        asyncio.run(self._setLight(int(command.get('value'))))
         self.setDriver('GV5', int(command.get('value')))
                         
     def query(self):
