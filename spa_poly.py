@@ -250,7 +250,7 @@ class Spa(polyinterface.Node):
         except Exception as ex :
             print ("_setTemp: " + ex )
         
-    async def _setPump(pump, setting):
+    async def _setPump(self,pump, setting):
         try:
             print ("1")
             spa = balboa.BalboaSpaWifi(self.host)
