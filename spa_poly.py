@@ -160,7 +160,7 @@ class Spa(polyinterface.Node):
         try :
             asyncio.run(self.getTemp())
             self.reportDrivers()
-        Except :
+        except :
             pass
     
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': 25},
