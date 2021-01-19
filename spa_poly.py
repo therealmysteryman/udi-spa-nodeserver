@@ -183,8 +183,11 @@ class Spa(polyinterface.Node):
             # Pump
             self.setDriver('GV1', spa.get_pump(0))
             self.setDriver('GV2', spa.get_pump(1))
-            self.setDriver('GV3', spa.get_pump(0))
-            
+            if ( spa.get_pump(0) == 0 ) :
+                self.setDriver('GV3',0)
+            else :
+                self.setDriver('GV3',100)
+           
             # Blower
             if ( spa.get_blower(True) == 'Off' ) :
                 self.setDriver('GV4',0)
