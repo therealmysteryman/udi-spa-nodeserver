@@ -6,15 +6,15 @@
     "executable": "spa_poly.py",
     "install": "install.sh",
     "shortPoll": "60",
-    "longPoll": "300",
+    "longPoll": "600",
     "description": "This Poly provides an interface between for a spa equipped with a Balboa BP system and a bwa™ Wi-Fi Module (50350).",
     "notice": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver/blob/master/LICENSE",
     "credits": [
         {
             "title": "SmartBlinds: A Polyglot v2 interface to SmartBlinds",
             "author": "AutomationGeek",
-            "version": "2.0.1",
-            "date": "January 18, 2021",
+            "version": "2.0.2",
+            "date": "January 24, 2021",
             "source": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver",
             "license": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver/blob/master/README.md"
         },
