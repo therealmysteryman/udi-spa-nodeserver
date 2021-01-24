@@ -36,7 +36,6 @@ class Controller(polyinterface.Controller):
         self.name = 'BalboaSpa'
         self.initialized = False
         self.queryON = False
-        self.hb = 0
         self.host = ""
         
     def start(self):
@@ -60,14 +59,17 @@ class Controller(polyinterface.Controller):
            
     def shortPoll(self):
         self.setDriver('ST', 1)
-        self.reportDrivers()
         for node in self.nodes:
             if  self.nodes[node].queryON == True :
-                self.nodes[node].query()
+                self.nodes[node].update()
 
     def longPoll(self):
         self.heartbeat()
-       
+    
+    def query(self):
+        for node in self.nodes:
+            self.nodes[node].reportDrivers()
+    
     def heartbeat(self):
         LOGGER.debug('heartbeat: hb={}'.format(self.hb))
         if self.hb == 0:
@@ -105,7 +107,7 @@ class Controller(polyinterface.Controller):
        
     id = 'controller'
     commands = {
-        'QUERY': shortPoll,
+        'QUERY': query,
         'DISCOVER': discover,
         'INSTALL_PROFILE': install_profile
     }
@@ -120,7 +122,7 @@ class Spa(polyinterface.Node):
         self.host = host
 
     def start(self):
-        self.query()
+        self.update()
 
     def setP1(self, command):
         asyncio.run(self._setPump(0,int(command.get('value'))))
@@ -154,10 +156,12 @@ class Spa(polyinterface.Node):
         asyncio.run(self._setLight(int(command.get('value'))))
         self.setDriver('GV5', int(command.get('value')))
                         
-    def query(self):
+    def update(self):
         asyncio.run(self._getSpaStatus())
+            
+    def query(self):
         self.reportDrivers()
-       
+
     async def _getSpaStatus (self) :
         try :
             spa = pybalboa.BalboaSpaWifi(self.host)
