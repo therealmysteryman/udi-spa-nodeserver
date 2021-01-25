@@ -37,6 +37,7 @@ class Controller(polyinterface.Controller):
         self.initialized = False
         self.queryON = False
         self.host = ""
+        self.hb = 0
         
     def start(self):
         LOGGER.info('Started Balboa SPA for v2 NodeServer version %s', str(VERSION))
