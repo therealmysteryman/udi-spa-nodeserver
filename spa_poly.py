@@ -188,7 +188,8 @@ class Spa(polyinterface.Node):
             # Pump
             self.setDriver('GV1', spa.get_pump(0))
             self.setDriver('GV2', spa.get_pump(1))
-            if ( spa.get_pump(0) == 0 ) :
+            
+            if ( spa.get_circ_pump() == 0 ) :
                 self.setDriver('GV3',0)
             else :
                 self.setDriver('GV3',100)
