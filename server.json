@@ -13,8 +13,8 @@
         {
             "title": "SmartBlinds: A Polyglot v2 interface to SmartBlinds",
             "author": "AutomationGeek",
-            "version": "2.0.3",
-            "date": "January 24, 2021",
+            "version": "2.0.4",
+            "date": "March 21, 2021",
             "source": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver",
             "license": "https://github.com/therealmysteryman/udi-balboaSpa-nodeserver/blob/master/README.md"
         },
