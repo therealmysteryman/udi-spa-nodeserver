@@ -1,3 +1,5 @@
+## This nodeserver has been converted to run on PG3. The code has been moved to https://github.com/UniversalDevicesInc-PG3/udi-spa-nodeserver
+
 # Balboa SPA  
 
 This Poly provides an interface between  for a spa equipped with a Balboa BP system and a bwa™ Wi-Fi Module (50350).
